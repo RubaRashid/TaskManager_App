@@ -1,0 +1,14 @@
+.layout {
+  min-height: 100vh;
+  background: #f5f7fb;
+}
+
+.main-content {
+  margin-left: 500px;
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.page-content {
+  margin-top: 24px;
+}
