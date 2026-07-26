@@ -282,10 +282,15 @@ function AdminDashboard() {
 
   return (
     <>
-      <Header
+      {/* <Header
         title="Dashboard"
         userName="Ahmed"
         role="Administrator"
+      /> */}
+
+      <Header
+        title="Dashboard"
+        subtitle="Manage your tasks efficiently"
       />
 
       <div className="mb-4"></div>
@@ -374,15 +379,15 @@ function AdminDashboard() {
 
                             <span
                               className={`badge ${task.status ===
-                                  "Completed"
-                                  ? "bg-success"
+                                "Completed"
+                                ? "bg-success"
 
-                                  : task.status ===
-                                    "In Progress"
+                                : task.status ===
+                                  "In Progress"
 
-                                    ? "bg-warning text-dark"
+                                  ? "bg-warning text-dark"
 
-                                    : "bg-secondary"
+                                  : "bg-secondary"
                                 }`}
                             >
                               {

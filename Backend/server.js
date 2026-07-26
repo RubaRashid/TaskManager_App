@@ -24,8 +24,12 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
-const reportRoutes =
-  require("./routes/reportRoutes");
+
+
+const reportRoutes = require("./routes/reportRoutes");
+const profileRoutes = require("./routes/profileRoutes");
+const notificationRoutes = require("./routes/notificationRoutes");
+
 
 const connectDB = require("./config/db");
 
@@ -70,6 +74,10 @@ app.use(
   "/api/reports",
   reportRoutes
 );
+
+app.use("/api/profile", profileRoutes);
+app.use("/api/notification", notificationRoutes)
+
 
 
 app.get("/", (req, res) => {

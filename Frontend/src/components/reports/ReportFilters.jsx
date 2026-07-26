@@ -159,7 +159,7 @@ function ReportFilters({
             >
               <FaFileExcel />
             </button> */}
-                        <div className="d-flex justify-content-end">
+                        <div className="d-flex ">
 
                             <button
                                 className="btn btn-outline-danger d-flex align-items-center"
