@@ -153,6 +153,7 @@
 import { useNavigate } from "react-router-dom";
 import { FaCog } from "react-icons/fa";
 
+import NotificationBell from "./NotificationBell";
 import HeaderSearch from "./HeaderSearch";
 import HeaderNotification from "./HeaderNotification";
 import HeaderProfile from "./HeaderProfile";
@@ -205,7 +206,7 @@ function Header({
 
             <HeaderSearch />
 
-            <HeaderNotification />
+            <NotificationBell />
 
             <button
               className="btn bg-light"

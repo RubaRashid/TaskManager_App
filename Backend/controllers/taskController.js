@@ -31,7 +31,7 @@
 
 
 const Task = require("../models/Task");
-
+const Notification = require("../models/Notification");
 
 // ==============================
 // GET ALL TASKS
@@ -157,6 +157,13 @@ const createTask = async (
         dueDate,
       });
 
+    await Notification.create({
+      userId: task.assignedTo,
+      title: "New Task Assigned",
+      message: `You have been assigned "${task.taskName}"`,
+      type: "Task",
+    });
+
     res.status(201).json({
       success: true,
       message:
@@ -204,7 +211,12 @@ const updateTask = async (
     );
 
     await task.save();
-
+    await Notification.create({
+      userId: task.assignedTo,
+      title: "Task Updated",
+      message: `"${task.taskName}" has been updated`,
+      type: "Task",
+    });
     res.status(200).json({
       success: true,
       message:

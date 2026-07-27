@@ -1,4 +1,6 @@
 const Project = require("../models/Project");
+const Notification = require("../models/Notification");
+const User = require("../models/User");
 
 
 // ==============================
@@ -98,7 +100,18 @@ const createProject = async (
         startDate,
         endDate,
       });
+      const admins = await User.find({
+  role: "admin",
+});
 
+for (const admin of admins) {
+  await Notification.create({
+    userId: admin._id,
+    title: "Project Created",
+    message: `${project.projectName} has been created`,
+    type: "Project",
+  });
+}
     res.status(201).json({
       success: true,
       message:
@@ -146,7 +159,12 @@ const updateProject = async (
     );
 
     await project.save();
-
+    await Notification.create({
+  userId: req.user.id,
+  title: "Project Updated",
+  message: `${project.projectName} has been updated`,
+  type: "Project",
+});
     res.status(200).json({
       success: true,
       message:
