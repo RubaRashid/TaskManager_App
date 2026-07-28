@@ -4,10 +4,13 @@ import {
   getNotifications,
   markNotificationRead,
 } from "../../services/notificationApi";
+import { formatDistanceToNow } from "date-fns";
+import { useNavigate } from "react-router-dom";
 
 function NotificationBell() {
   const [notifications, setNotifications] = useState([]);
   const [count, setCount] = useState(0);
+  const navigate = useNavigate();
 
   const loadNotifications = async () => {
     try {
@@ -30,10 +33,29 @@ function NotificationBell() {
     return () => clearInterval(interval);
   }, []);
 
-  const handleRead = async (id) => {
-    await markNotificationRead(id);
-    loadNotifications();
+  // const handleRead = async (id) => {
+  //   await markNotificationRead(id);
+  //   loadNotifications();
+  // };
+
+
+  const handleRead = async (notification) => {
+    try {
+      await markNotificationRead(notification._id);
+
+      if (notification.type === "Task") {
+        navigate("/admin/tasks");
+      } else if (notification.type === "Project") {
+        navigate("/admin/projects");
+      }
+
+      loadNotifications();
+    } catch (err) {
+      console.log(err);
+    }
   };
+
+          console.log("NotificationBell Rendered");
 
   return (
     <div className="dropdown">
@@ -69,34 +91,62 @@ function NotificationBell() {
             No notifications
           </li>
         ) : (
+          // 
           notifications.map((item) => (
             <li
               key={item._id}
-              onClick={() => handleRead(item._id)}
-              className="dropdown-item"
+              onClick={() => handleRead(item)}
+              className="dropdown-item py-3"
               style={{
                 cursor: "pointer",
                 whiteSpace: "normal",
+                backgroundColor: item.isRead
+                  ? "#fff"
+                  : "#eef5ff",
+                borderBottom: "1px solid #f2f2f2",
               }}
             >
-              <div className="fw-semibold">
-                {item.title}
+              <div className="d-flex justify-content-between">
+
+                <strong>{item.title}</strong>
+
+                {!item.isRead && (
+                  <span className="badge bg-primary">
+                    New
+                  </span>
+                )}
+
               </div>
 
-              <small className="text-muted">
+              <div
+                className="text-muted small mt-1"
+              >
                 {item.message}
-              </small>
+              </div>
 
-              {!item.isRead && (
-                <span
-                  className="badge bg-primary ms-2"
-                >
-                  New
-                </span>
-              )}
+              <small className="text-secondary">
+                {formatDistanceToNow(
+                  new Date(item.createdAt),
+                  { addSuffix: true }
+                )}
+              </small>
             </li>
           ))
         )}
+
+        <li>
+          <hr className="dropdown-divider" />
+        </li>
+
+        <li>
+          <button
+            className="dropdown-item text-center fw-semibold text-primary"
+            onClick={() => navigate("/admin/notifications")}
+          >
+            View All Notifications
+          </button>
+        </li>
+
       </ul>
     </div>
   );

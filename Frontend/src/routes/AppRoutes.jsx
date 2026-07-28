@@ -42,6 +42,7 @@ import { Routes, Route } from "react-router-dom";
 import MainLayout from "../components/layout/MainLayout";
 import Login from "../pages/Auth/Login";
 import AdminDashboard from "../pages/Admin/Dashboard";
+import AdminNotifications from "../pages/Admin/AdminNotifications";
 import AdminTasks from "../pages/Admin/AdminTasks";
 import AdminProjects from "../pages/Admin/AdminProjects";
 import AdminUsers from "../pages/Admin/User";
@@ -93,6 +94,11 @@ function AppRoutes() {
           element={<AdminSettings />}
         />
 
+
+        <Route
+          path="/admin/notifications"
+          element={<AdminNotifications />}
+        />
 
         {/* <Route
           path="users"
