@@ -24,21 +24,36 @@
 
 
 
-
+import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-
+import { UserProvider } from "../src/context/UserContext"
 import AppRoutes from "./routes/AppRoutes";
 
 function App() {
   return (
-    <BrowserRouter>
+    // <BrowserRouter>
 
-      <ToastContainer />
+    //   <ToastContainer />
 
-      <AppRoutes />
+    //   <AppRoutes />
 
-    </BrowserRouter>
+    // </BrowserRouter>
+
+
+    <React.StrictMode>
+
+      <UserProvider>
+
+        <BrowserRouter>
+
+          <App />
+
+        </BrowserRouter>
+
+      </UserProvider>
+
+    </React.StrictMode>
   );
 }
 

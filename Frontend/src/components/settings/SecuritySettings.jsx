@@ -1,6 +1,6 @@
 import {
   getMyProfile,
-  updateProfile,
+  updateMyProfile,
 } from "../../services/profileApi";
 
 import { toast } from "react-toastify";
@@ -29,7 +29,7 @@ const handleSave = async () => {
 
 
 
-
+export default handleSave;
 
 
 
