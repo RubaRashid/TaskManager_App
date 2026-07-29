@@ -152,7 +152,10 @@
 
 import { useNavigate } from "react-router-dom";
 import { FaCog } from "react-icons/fa";
+import { useEffect, useState } from "react";
 
+
+import { getMyProfile } from "../../services/profileApi";
 import NotificationBell from "./NotificationBell";
 import HeaderSearch from "./HeaderSearch";
 import HeaderNotification from "./HeaderNotification";
@@ -163,6 +166,30 @@ function Header({
   subtitle = "Manage your tasks efficiently",
 }) {
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+  loadProfile();
+}, []);
+
+const loadProfile = async () => {
+  try {
+    const res = await getMyProfile();
+
+    setUser({
+      email: res.user.email,
+      designation: res.user.designation,
+      fullName: res.profile?.fullName,
+      profilePicture:
+        res.profile?.profilePicture ||
+        null,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+
 
   return (
     <div

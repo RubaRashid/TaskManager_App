@@ -76,6 +76,7 @@ app.use(
 );
 
 app.use("/api/profile", profileRoutes);
+
 app.use("/api/notifications", notificationRoutes)
 
 

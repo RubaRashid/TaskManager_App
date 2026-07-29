@@ -26,7 +26,7 @@ function ProfileDropdown() {
       <div className="card-body p-2">
 
         <Link
-          to="/profile"
+          to="/admin/profile"
           className="dropdown-item py-2"
         >
           <FaUser className="me-2" />

@@ -28,4 +28,49 @@ router.get("/me", authMiddleware, async (req, res) => {
   }
 });
 
+
+router.put("/update", authMiddleware, async (req, res) => {
+  try {
+    const {
+      fullName,
+      phoneNumber,
+      cnicNumber,
+      profilePicture,
+      dateOfBirth,
+    } = req.body;
+
+    const user = await User.findById(req.user.id);
+
+    let profile = await UserProfile.findOne({
+      userId: user._id,
+    });
+
+    if (!profile) {
+      profile = await UserProfile.create({
+        userId: user._id,
+      });
+    }
+
+    profile.fullName = fullName;
+    profile.phoneNumber = phoneNumber;
+    profile.cnicNumber = cnicNumber;
+    profile.profilePicture = profilePicture;
+    profile.dateOfBirth = dateOfBirth;
+
+    await profile.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Profile updated successfully",
+      profile,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+
 module.exports = router;

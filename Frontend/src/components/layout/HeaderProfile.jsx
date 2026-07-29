@@ -164,7 +164,7 @@ function HeaderProfile() {
           </small>
 
           <small className="text-muted" style={{ fontSize: "11px" }}>
-            {user.email}
+            {user.role}
           </small>
         </div>
 

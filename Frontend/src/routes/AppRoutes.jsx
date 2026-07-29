@@ -45,6 +45,7 @@ import AdminDashboard from "../pages/Admin/Dashboard";
 import AdminNotifications from "../pages/Admin/AdminNotifications";
 import AdminTasks from "../pages/Admin/AdminTasks";
 import AdminProjects from "../pages/Admin/AdminProjects";
+import Profile from "../pages/Admin/Profile";
 import AdminUsers from "../pages/Admin/User";
 import AdminReports from "../pages/Admin/AdminReports";
 import AdminSettings from "../pages/Admin/AdminSettings";
@@ -99,6 +100,12 @@ function AppRoutes() {
           path="/admin/notifications"
           element={<AdminNotifications />}
         />
+
+
+        <Route
+  path="profile"
+  element={<Profile />}
+/>
 
         {/* <Route
           path="users"
