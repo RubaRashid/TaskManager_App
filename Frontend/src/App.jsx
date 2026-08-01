@@ -47,7 +47,7 @@ function App() {
 
         <BrowserRouter>
 
-          <App />
+          <AppRoutes />
 
         </BrowserRouter>
 
